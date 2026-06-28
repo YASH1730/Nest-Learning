@@ -54,4 +54,10 @@ export class ProductsService {
     // Logic to create a new product would go here
     return { data, message: 'Product created successfully' };
   }
+
+  searchProducts(available: boolean): Array<{ item: string; stockInfo: StockInfo }> {
+    this.loggerService.logger(`Searching for products: ${available}`);
+    const products = this.listProducts();
+    return products.filter((product) => product.stockInfo.stock > 0);
+  }
 }
