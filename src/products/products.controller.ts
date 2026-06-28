@@ -1,8 +1,11 @@
-import { Body, Controller, Get, Param, ParseBoolPipe, ParseIntPipe, Post, Query } from '@nestjs/common';
+import { Body, Controller, Get, Param, ParseBoolPipe, ParseIntPipe, Post, Query, UseGuards, UseInterceptors } from '@nestjs/common';
 import { ProductsService } from './products.service';
 import { CreateProductDto } from './dto/create-product.dto';
+import { AuthGuard } from './guards/auth/auth.guard';
+import { InterceptorInterceptor } from 'src/logger/interceptor/interceptor.interceptor';
 
 @Controller('products')
+@UseInterceptors(InterceptorInterceptor)
 export class ProductsController {
   constructor(private productsService: ProductsService) {}
 
@@ -26,6 +29,7 @@ export class ProductsController {
 
   // get product details by id 
   @Get(':id')
+  @UseGuards(AuthGuard)
   getProductDetails(@Param('id' , ParseIntPipe) id: number) {
     return this.productsService.getProductDetails(id);
   }
