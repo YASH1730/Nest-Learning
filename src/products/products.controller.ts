@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, ParseBoolPipe, ParseIntPipe, Post, Query, UseGuards, UseInterceptors } from '@nestjs/common';
+import { Body, Controller, Get, NotFoundException, Param, ParseBoolPipe, ParseIntPipe, Post, Query, UseGuards, UseInterceptors } from '@nestjs/common';
 import { ProductsService } from './products.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { AuthGuard } from './guards/auth/auth.guard';
@@ -18,6 +18,7 @@ export class ProductsController {
   // create a new product
   @Post()
   createProduct(@Body() createProductDto: CreateProductDto) {
+    throw new NotFoundException('Product not found');
     return this.productsService.createProduct(createProductDto);
   }
 
