@@ -9,6 +9,8 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe());
   app.useGlobalGuards(new AuthGuard());
   app.useGlobalFilters(new CustomerFilterFilter());
-  await app.listen(process.env.PORT ?? 3000);
+  await app.listen(process.env.PORT ?? 8000,()=>{
+    console.log(`Server is running on port ${process.env.PORT ?? 8000}`);
+  });
 }
 bootstrap();

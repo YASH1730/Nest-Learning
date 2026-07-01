@@ -11,6 +11,8 @@ import { ContactsModule } from './contacts/contacts.module';
 import { OrdersModule } from './orders/orders.module';
 import { StocksModule } from './stocks/stocks.module';
 import { LoggerMiddleware } from './common/middleware/logger/logger.middleware';
+import { UploadController } from './upload/upload.controller';
+import { UploadService } from './upload/upload.service';
 
 @Module({
   imports: [
@@ -20,8 +22,8 @@ import { LoggerMiddleware } from './common/middleware/logger/logger.middleware';
     OrdersModule,
     StocksModule,
   ],
-  controllers: [AppController, ContactsController],
-  providers: [AppService, LoggerService, StocksService, ContactsService],
+  controllers: [AppController, ContactsController, UploadController],
+  providers: [AppService, LoggerService, StocksService, ContactsService, UploadService],
 })
 
 
